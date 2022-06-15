@@ -36,7 +36,7 @@
         function captchaCallback(response) {
             console.log(response);
             try {
-                RecaptchaFlutterChannel.postMessage(token);
+                RecaptchaFlutterChannel.postMessage(response);
             } catch (e) {
                 console.log("Something wrong...");
             }
