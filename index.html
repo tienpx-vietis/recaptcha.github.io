@@ -33,8 +33,8 @@
             var elem = document.activeElement;
             if (elem && elem.tagName == 'IFRAME') {
                 alert("Click detected inside iframe.");
-                CaptchaActiveFlutterChannel.postMessage(true);
                 clearInterval(detector);
+                CaptchaActiveFlutterChannel.postMessage(true);
             }
         }, 100);
 
