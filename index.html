@@ -34,7 +34,10 @@
     });
   </script> -->
 
-  <div id="html_element"></div>
+  //<div id="html_element"></div>
+  <div class="g-recaptcha" 
+        data-sitekey="6Le08WogAAAAAFPaUyVCwB97nPsKvWjpU2SJ2qU7"
+        data-callback="captchaCallback"></div>
 
   <script type="text/javascript">
     function findGetParameter(parameterName) {
@@ -60,13 +63,20 @@
 
     function verifyCallback(token) {
       console.log(token);
-      // console.log(grecaptcha.getResponse());
+      console.log(grecaptcha.getResponse());
       try {
         RecaptchaFlutterChannel.postMessage(token);
       } catch (e) {
         console.log("Something wrong...");
       }
     }
+    
+    function captchaCallback(response){
+        console.log(response);
+        if(typeof Captcha!=="undefined"){
+          RecaptchaFlutterChannel.postMessage(response);
+        }
+      }
   </script>
 
 </body>
