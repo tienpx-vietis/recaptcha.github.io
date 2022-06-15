@@ -6,20 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="content-language" content="en" />
-
-    <!-- SEO -->
     <title>RECAPTCHA - FLUTTER PLUGIN</title>
     <meta name="description" content="A Flutter plugin for Google ReCaptcha">
-
-    <!-- Social Sharing Info -->
     <meta property="og:url" content="" />
     <meta property="og:title" content="RECAPTCHA - FLUTTER PLUGIN" />
     <meta property="og:description" content="A Flutter plugin for Google ReCaptcha" />
-
-    <!-- Viewport and mobile -->
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
-
     <script src="https://www.google.com/recaptcha/api.js" async defer>
     </script>
 </head>
@@ -27,25 +20,29 @@
 <body>
     <div class="g-recaptcha" data-sitekey="6Le08WogAAAAAFPaUyVCwB97nPsKvWjpU2SJ2qU7" data-callback="captchaCallback">
     </div>
-
     <script type="text/javascript">
         var detector = setInterval(function () {
             var elem = document.activeElement;
             if (elem && elem.tagName == 'IFRAME') {
-                alert("Click detected inside iframe.");
                 clearInterval(detector);
-                CaptchaActiveFlutterChannel.postMessage(true);
+                try {
+                    CaptchaActiveFlutterChannel.postMessage(true);
+                } catch (e) {
+                    console.log("Something wrong...");
+                }
+
             }
         }, 100);
 
         function captchaCallback(response) {
             console.log(response);
-            if (typeof Captcha !== "undefined") {
-                RecaptchaFlutterChannel.postMessage(response);
+            try {
+                RecaptchaFlutterChannel.postMessage(token);
+            } catch (e) {
+                console.log("Something wrong...");
             }
         }
     </script>
-
 </body>
 
 </html>
