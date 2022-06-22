@@ -46,13 +46,13 @@
             }
             setTimeout(() => {
                 try {
-                    console.log("TimeoutFlutterChannel - send");
+                    console.log("CaptchaActiveFlutterChannel - send");
                     CaptchaActiveFlutterChannel.postMessage(false);
                 } catch (e) {
-                    console.log("TimeoutFlutterChannel - error" + e);
+                    console.log("CaptchaActiveFlutterChannel - error" + e);
                 }
                 isLockEvent = false;
-            }, 4000);
+            }, 1000 * 60);
         }
     </script>
 </body>
