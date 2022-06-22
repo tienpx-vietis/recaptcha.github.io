@@ -21,22 +21,34 @@
     <div class="g-recaptcha" data-sitekey="6Le08WogAAAAAFPaUyVCwB97nPsKvWjpU2SJ2qU7" data-callback="captchaCallback">
     </div>
     <script type="text/javascript">
+        var isLockEvent = false;
+        var isTimeOut = false;
+
         var detector = setInterval(function () {
             var elem = document.activeElement;
             if (elem && elem.tagName == 'IFRAME') {
-                clearInterval(detector);
-                try {
-                    CaptchaActiveFlutterChannel.postMessage(true);
-                } catch (e) {
-                    console.log("Something wrong...");
+                if (!isLockEvent) {
+                    try {
+                        CaptchaActiveFlutterChannel.postMessage(true);
+                        isLockEvent = true;
+                        console.log("CaptchaActiveFlutterChannel - send");
+                    } catch (e) {
+                        console.log("Something wrong...");
+                    }
                 }
             }
-        }, 100);
+        }, 500);
 
         function captchaCallback(response) {
             console.log(response);
             try {
                 RecaptchaFlutterChannel.postMessage(response);
+                console.log("RecaptchaFlutterChannel - send");
+                setTimeout(() => {
+                    isLockEvent = false;
+                    TimeOutFlutterChannel.postMessage(true);
+                    console.log("TimeOutFlutterChannel - send");
+                }, 2000);
             } catch (e) {
                 console.log("Something wrong...");
             }
