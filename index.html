@@ -33,7 +33,7 @@
                         CaptchaActiveFlutterChannel.postMessage(true);
                         isLockEvent = true;
                     } catch (e) {
-                        console.log("Something wrong...");
+                        console.log("CaptchaActiveFlutterChannel - error" + e);
                     }
                 }
             }
@@ -45,7 +45,7 @@
                 console.log("RecaptchaFlutterChannel - send");
                 RecaptchaFlutterChannel.postMessage(response);
             } catch (e) {
-                console.log("Something wrong...");
+                console.log("RecaptchaFlutterChannel - error" + e);
             }
             setTimeout(() => {
                 isLockEvent = false;
@@ -53,7 +53,7 @@
                     console.log("TimeoutFlutterChannel - send");
                     TimeoutFlutterChannel.postMessage(true);
                 } catch (e) {
-                    console.log("Something wrong...");
+                    console.log("TimeoutFlutterChannel - error" + e);
                 }
             }, 2000);
         }
