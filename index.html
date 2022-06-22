@@ -47,12 +47,12 @@
             setTimeout(() => {
                 try {
                     console.log("TimeoutFlutterChannel - send");
-                    TimeoutFlutterChannel.postMessage(true);
+                    CaptchaActiveFlutterChannel.postMessage(false);
                 } catch (e) {
                     console.log("TimeoutFlutterChannel - error" + e);
                 }
                 isLockEvent = false;
-            }, 1000 * 60);
+            }, 4000);
         }
     </script>
 </body>
