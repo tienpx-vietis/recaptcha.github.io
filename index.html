@@ -31,10 +31,10 @@
                     try {
                         console.log("CaptchaActiveFlutterChannel - send");
                         CaptchaActiveFlutterChannel.postMessage(true);
-                        isLockEvent = true;
                     } catch (e) {
                         console.log("CaptchaActiveFlutterChannel - error" + e);
                     }
+                    isLockEvent = true;
                 }
             }
         }, 500);
@@ -48,13 +48,13 @@
                 console.log("RecaptchaFlutterChannel - error" + e);
             }
             setTimeout(() => {
-                isLockEvent = false;
                 try {
                     console.log("TimeoutFlutterChannel - send");
                     TimeoutFlutterChannel.postMessage(true);
                 } catch (e) {
                     console.log("TimeoutFlutterChannel - error" + e);
                 }
+                isLockEvent = false;
             }, 2000);
         }
     </script>
