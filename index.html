@@ -29,9 +29,9 @@
             if (elem && elem.tagName == 'IFRAME') {
                 if (!isLockEvent) {
                     try {
+                        console.log("CaptchaActiveFlutterChannel - send");
                         CaptchaActiveFlutterChannel.postMessage(true);
                         isLockEvent = true;
-                        console.log("CaptchaActiveFlutterChannel - send");
                     } catch (e) {
                         console.log("Something wrong...");
                     }
@@ -42,16 +42,20 @@
         function captchaCallback(response) {
             console.log(response);
             try {
-                RecaptchaFlutterChannel.postMessage(response);
                 console.log("RecaptchaFlutterChannel - send");
-                setTimeout(() => {
-                    isLockEvent = false;
-                    TimeOutFlutterChannel.postMessage(true);
-                    console.log("TimeOutFlutterChannel - send");
-                }, 2000);
+                RecaptchaFlutterChannel.postMessage(response);
             } catch (e) {
                 console.log("Something wrong...");
             }
+            setTimeout(() => {
+                isLockEvent = false;
+                try {
+                    console.log("TimeoutFlutterChannel - send");
+                    TimeoutFlutterChannel.postMessage(true);
+                } catch (e) {
+                    console.log("Something wrong...");
+                }
+            }, 2000);
         }
     </script>
 </body>
